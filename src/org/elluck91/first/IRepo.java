@@ -23,4 +23,6 @@ public interface IRepo {
      int InsertPost(Post post);
      int UpdatePost(int ID,Post newPost);
      int DeletePost(int ID);
+	List<Post> SearchPostsInsecure(String title, String username);
+	List<Post> GetAllPostsInsecure(String username);
 }

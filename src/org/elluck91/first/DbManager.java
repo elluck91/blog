@@ -174,8 +174,8 @@ public class DbManager implements IRepo{
 				post.AllowComments = res.getBoolean(9);
 				posts.add(post);
 			}
-			
-			
+
+
 			return posts;
 
 
@@ -294,9 +294,6 @@ public class DbManager implements IRepo{
 
 			Class.forName("com.mysql.jdbc.Driver");
 			con  = DriverManager.getConnection("jdbc:mysql://localhost/blog","elluck91","blank");
-
-			Post post = new Post();
-
 			PreparedStatement sql = con.prepareStatement("DELETE FROM Posts WHERE ID=?");
 			sql.setInt(1, ID);
 
@@ -409,6 +406,106 @@ public class DbManager implements IRepo{
 		}
 
 
+	}
+
+	@Override
+	public List<Post> SearchPostsInsecure(String title, String username){
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/blog","elluck91","blank");
+
+
+			Post post;
+			List<Post>  posts = new ArrayList<Post>();
+
+
+			String accountBalanceQuery = "SELECT * FROM Posts WHERE PostTitle='" + title + "' AND PostAuthor='" + username + "'";
+			System.out.println(accountBalanceQuery);
+			Statement statement = con.createStatement();
+			ResultSet res = statement.executeQuery(accountBalanceQuery);
+			while( res.next()){
+				post = new Post();
+				post.ID = res.getInt(1);
+				post.PostTitle = res.getString(2);
+				post.PostContent = res.getString(3);
+				post.PostDescription = res.getString(4);
+				post.PostImage = res.getString(5);
+				post.PublishDate = res.getString(6);
+				post.PostAuthor = res.getString(7);
+				post.IsVisiable = res.getBoolean(8);
+				post.AllowComments = res.getBoolean(9);
+				posts.add(post);
+			}
+
+				System.out.println("Size of posts: " + posts.size());
+			return posts;
+		} catch (SQLException ex) {
+			Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, "ex happened !!!", ex);
+			return null;
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}catch(Exception ex){
+			Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+			return null;
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException ex) {
+				Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+
+
+	}
+	
+	@Override
+	public List<Post> GetAllPostsInsecure(String username) {
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/blog","elluck91","blank");
+
+			Post post;
+			List<Post>  posts = new ArrayList<Post>();
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM Posts WHERE PostAuthor='" + username + "'");
+
+			ResultSet res = sql.executeQuery();
+			while( res.next()){
+				post = new Post();
+				post.ID = res.getInt(1);
+				post.PostTitle = res.getString(2);
+				post.PostContent = res.getString(3);
+				post.PostDescription = res.getString(4);
+				post.PostImage = res.getString(5);
+				post.PublishDate = res.getString(6);
+				post.PostAuthor = res.getString(7);
+				post.IsVisiable = res.getBoolean(8);
+				post.AllowComments = res.getBoolean(9);
+				posts.add(post);
+			}
+
+
+			return posts;
+
+
+		} catch (SQLException ex) {
+			Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, "ex happened !!!", ex);
+			return null;
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}catch(Exception ex){
+			Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+			return null;
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException ex) {
+				Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
 	}
 
 

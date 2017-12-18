@@ -3,7 +3,32 @@
     Created on : 18/12/2013, 07:58:21 ص
     Author     : Lukasz Juraszek
 --%>
-
+<%@page import="java.util.*, java.net.URLEncoder"%>
+<%
+	Cookie lastVisit = null;
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null) {
+		for (int i = 0; i < cookies.length; i++) {
+			if (cookies[i].getName().equalsIgnoreCase("last_visit")) {
+				lastVisit = cookies[i];
+				break;
+			}
+		}
+	}
+	
+	if (null == lastVisit) {
+		Date currentTime = new java.util.Date();
+		lastVisit = new Cookie("last_visit", URLEncoder.encode( currentTime.toString(), "UTF-8" ));
+		lastVisit.setMaxAge(1800);
+		response.addCookie(lastVisit);
+	}
+	else {
+		Date currentTime = new java.util.Date();
+		lastVisit.setValue(URLEncoder.encode( currentTime.toString(), "UTF-8" ));
+		lastVisit.setMaxAge(1800);
+		response.addCookie(lastVisit);
+	}
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"
 	import="org.elluck91.first.*"%>
 <!DOCTYPE html>

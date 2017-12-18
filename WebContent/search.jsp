@@ -73,10 +73,14 @@
                             Post post = i.next();
                     %>
                     <div class="jumbotron">
-                        <h2><a href="#"><c:out value="${post.PostTitle}"/></a></h2>
-                        <img class="postimg" src="<c:out value="${post.PostImage}"/>" title="Image Title !!!" />
-                        <p><c:out value="${post.PostDescription}"/></p>
-                        <p> Author : <strong> <c:out value="${post.PostAuthor}"/> </strong> </p>
+                    
+                    
+                    
+                    
+                        <h2><a href="#"><c:out value="<%=post.PostTitle%>" escapeXml="true" /></a></h2>
+                        <img class="postimg" src="<c:out value='<%=post.PostImage%>' escapeXml='true' />"/>
+                        <p><c:out value="<%=post.PostDescription%>" escapeXml="true" /></p>
+                        <p> Author : <strong> <c:out value="<%=post.PostAuthor%>" escapeXml="true" /></strong> </p>
                         <a href="./post.jsp?id=<%= post.ID%>" class="btn btn-primary">Read More...</a>
                     </div>
                     <hr />

@@ -63,7 +63,7 @@
 
                     <% DbManager db = new DbManager();
 
-                        List<Post> posts = db.GetAllPosts();
+                        List<Post> posts = db.GetAllPostsInsecure( (String) session.getAttribute("userid"));
 
                     %>
                     <% for (Iterator<Post> i = posts.iterator(); i.hasNext();) {
@@ -87,7 +87,7 @@
                     <a href="./newpost.jsp" class="btn btn-success">Write New Post!</a>
                     <br>
                     <br>
-                    <form action="./search.jsp" method="GET">
+                    <form action="./search_vulnerable.jsp" method="GET">
                     <label for="q">Search :</label>
                     <input class="form-control" type="text" name="q" placeholder="Search..." id="q">
                     <br>
