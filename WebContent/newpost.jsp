@@ -45,7 +45,15 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="blog.jsp">Blog</a></li>
-                        <li><a href="about.jsp">About Us</a></li>
+                        <li class="dropdown"><a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Demos<b class="caret"></b></a>
+							<ul class = "dropdown-menu">
+			               <li><a href = "blog_vulnerable.jsp">SQL Injection</a></li>
+			               <li><a href = "blog_vulnerable.jsp">Cross Site Scripting</a></li>
+			               <li><a href = "cookie.jsp">Cookies</a></li>
+			               <li><a href = "post.jsp?id=34">Session Management</a></li>
+			               <li><a href = "crypto.html">Encryption</a></li>
+			               </ul>
+			            </li>
                         <li><a href="./LogoutAPI">Logout</a>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -72,12 +80,13 @@
                     <p><strong>Image URL : </strong></p>
                     <input name="txtImage" type="text" class="form-control"   required >
                     <br>
-                    <p><strong>Content : </strong></p>
-                    <textarea name="txtContent" style="resize: both;" type="text" class="form-control" rows="15" cols="8" required > </textarea>
+                    <p><strong>Content :</strong></p>
+                    <textarea name="txtContent" style="resize: both;" class="form-control" rows="15" cols="8" required ></textarea>
                     <br>
                     
                     <input name="txtAuthor" type="hidden" value="<c:out value='<%=session.getAttribute("userid")%>' escapeXml="true" />">
                     <br>
+                    <input type="hidden" name="safe" value="yes">
                     <button name="btnUpdate" class="btn btn-lg btn-primary btn-block" type="submit">Publish</button>
                     <br>
                 </form>
@@ -92,7 +101,7 @@
             <footer>
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; Lukasz Juraszek 2017</p>
+                        <p>Copyright &copy; Lukasz Juraszek 2017 | <a href="privacy.jsp">Privacy Statement</a></p>
                     </div>
                 </div>
             </footer>

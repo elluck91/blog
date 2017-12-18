@@ -70,7 +70,6 @@
 					<li><a href="index.jsp">Home</a></li>
 					<li><a href="blog.jsp">Blog</a></li>
 					<li><a href="register.jsp">Register</a></li>
-					<li><a href="about.jsp">About Us</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -122,7 +121,7 @@
 		<footer>
 			<div class="row">
 				<div class="col-lg-12">
-					<p>Copyright &copy; Lukasz Juraszek 2017</p>
+					<p>Copyright &copy; Lukasz Juraszek 2017 | <a href="privacy.jsp">Privacy Statement</a></p>
 				</div>
 			</div>
 		</footer>

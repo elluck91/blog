@@ -3,31 +3,19 @@
     Created on : 18/12/2013, 07:58:21 ص
     Author     : Lukasz Juraszek
 --%>
-<%@ page language="java" contentType="text/html; 
-charset=utf-8" pageEncoding="utf-8" isELIgnored="false" import="org.elluck91.first.*"%>
-<%@page import="java.util.List"%>
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="s" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="org.elluck91.first.*" %>
 
-<%
-String userid = (String)session.getAttribute("userid");
-if(userid == null) {
-    response.sendRedirect("login.jsp");
-    return;
-}
-%>
 <!DOCTYPE html>
 <html lang="en">
-	
-	
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="Lukasz Juraszek">
 
-        <title>Bloggr</title>
+        <title>New Post | Bloggr</title>
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.css" rel="stylesheet">
@@ -35,8 +23,6 @@ if(userid == null) {
         <!-- Add custom CSS here -->
         <link href="css/modern-business.css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-       
-
     </head>
 
     <body>
@@ -75,66 +61,42 @@ if(userid == null) {
         </nav>
 
         <div class="container">
-            <br>
-            <br>
-            <div class="row row-offcanvas row-offcanvas-right">
-                <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-
-                    <% DbManager db = new DbManager();
-
-                        List<Post> posts = db.GetAllPosts();
-
-                    %>
-                    <% for (Post post : posts) {
-                    %>
-                    <div class="jumbotron">
-                        <h2><a href="#"><c:out value="<%=post.PostTitle%>" escapeXml="true" /></a></h2>
-                        <img class="postimg" src="<c:out value="<%=post.PostImage%>" escapeXml="true" />"/>
-                        <p><c:out value="<%=post.PostDescription%>" escapeXml="true" /></p>
-                        <p> Author : <strong> <c:out value="<%=post.PostAuthor%>" escapeXml="true" /></strong> </p>
-                        <a href="./post.jsp?id=<%= post.ID%>" class="btn btn-primary">Read More...</a>
-                    </div>
-                    <hr />
-                    <%}%>
-
-                </div>
 
 
-                <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-                    <br>
-                    <a href="./newpost.jsp" class="btn btn-success">Write New Post!</a>
-                    <br>
-                    <br>
-                    <form action="./search.jsp" method="GET">
-                    <label for="q">Search :</label>
-                    <input class="form-control" type="text" name="q" placeholder="Search..." id="q">
-                    <br>
-                    <input type="submit" value="Search" class="btn btn-primary">
-                    </form>
+            <div class="container center-block" >
+
+                <form class="form-signin" action="./InsertAPI" method="POST" role="form">
                     <br>
                     <br>
-                    <div class="well sidebar-nav">
-                        <ul class="nav">
-                            <li><b>Categories</b></li>
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Programming</a></li>
-                            <li><a href="#">Web</a></li>
-                            <li><b>Social Links</b></li>
-                            <li><a href="#">Facebook</a></li>
-                            <li><a href="#">Youtube</a></li>
-                        </ul>
-                            
-                    </div>
-                    <!--/.well -->
-                    <a class="twitter-timeline" data-lang="en" data-width="250" data-height="480" href="https://twitter.com/TwitterDev/timelines/539487832448843776?ref_src=twsrc%5Etfw">National Park Tweets - Curated tweets by TwitterDev</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     
-                </div>
-                <!--/span-->
-            </div>
+                    <h2 class="form-signin-heading">Write a new Post : </h2>
+                    <br>
+                    <p><strong>Title : </strong></p>
+                    <input name="txtTitle" type="text" class="form-control"   required autofocus>
+                    <br>
+                    <p><strong>Description: </strong></p>
+                    <input name="txtDescription" type="text" class="form-control"  required >
+                    <br>
+                    <p><strong>Image URL : </strong></p>
+                    <input name="txtImage" type="text" class="form-control"   required >
+                    <br>
+                    <p><strong>Content : </strong></p>
+                    <textarea name="txtContent" style="resize: both;" type="text" class="form-control" rows="15" cols="8" required > </textarea>
+                    <br>
+                    
+                    <input name="txtAuthor" type="hidden" value="<c:out value='<%=session.getAttribute("userid")%>' escapeXml="true" />">
+                    <br>
+                    <input type="hidden" name="safe" value="no">
+                    <button name="btnUpdate" class="btn btn-lg btn-primary btn-block" type="submit">Publish</button>
+                    <br>
+                </form>
 
 
 
-            <hr>
+                <hr>
+
+            </div> <!-- /container --> 
+
 
             <footer>
                 <div class="row">
@@ -150,7 +112,7 @@ if(userid == null) {
         <script src="js/jquery-1.10.2.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/modern-business.js"></script>
-        
+
     </body>
 </html>
 

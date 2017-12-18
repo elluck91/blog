@@ -50,7 +50,15 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="index.jsp">Home</a></li>
 					<li><a href="blog.jsp">Blog</a></li>
-					<li><a href="about.jsp">About Us</a></li>
+					<li class="dropdown"><a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Demos<b class="caret"></b></a>
+						<ul class = "dropdown-menu">
+		               <li><a href = "blog_vulnerable.jsp">SQL Injection</a></li>
+			               <li><a href = "blog_vulnerable.jsp">Cross Site Scripting</a></li>
+			               <li><a href = "cookie.jsp">Cookies</a></li>
+			               <li><a href = "post.jsp?id=34">Session Management</a></li>
+			               <li><a href = "crypto.html">Encryption</a></li>
+		               </ul>
+		            </li>
 					<li><a href="./LogoutAPI">Logout</a>
 				</ul>
 			</div>
@@ -121,7 +129,7 @@
 		<footer>
 			<div class="row">
 				<div class="col-lg-12">
-					<p>Copyright &copy; Lukasz Juraszek 2017</p>
+					<p>Copyright &copy; Lukasz Juraszek 2017 | <a href="privacy.jsp">Privacy Statement</a></p>
 				</div>
 			</div>
 		</footer>

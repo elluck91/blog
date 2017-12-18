@@ -113,7 +113,7 @@
 		<footer>
 			<div class="row">
 				<div class="col-lg-12">
-					<p>Copyright &copy; Lukasz Juraszek 2017</p>
+					<p>Copyright &copy; Lukasz Juraszek 2017 | <a href="privacy.jsp">Privacy Statement</a></p>
 				</div>
 			</div>
 		</footer>
